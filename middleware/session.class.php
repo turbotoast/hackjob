@@ -7,7 +7,10 @@ class HackJob_Middleware_Session
 	{
 		$sessionName = HackJob_Conf_Provider::get('SESSION_NAME', 'HackJob');
 		session_name($sessionName);
-		session_start();
+		if(!isset($_SESSION))
+		{
+			session_start();
+		}
 		
 		return parent::request($request);
 	}
