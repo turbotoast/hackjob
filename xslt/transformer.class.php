@@ -22,7 +22,7 @@ class HackJob_Xslt_Transformer
 			$doc = new DOMDocument();
 		}
 		
-		if(is_null($name))
+		if($name === null)
 		{
 			$name = is_object($data) ? get_class($data) : 'node';
 		}
@@ -50,10 +50,6 @@ class HackJob_Xslt_Transformer
 					}
 					$node->appendChild(self::toDomElement($value, $key, $doc));
 				}
-			}
-			if($data instanceof HackJob_Model_Base)
-			{
-				$id = $node->appendChild(self::toDomElement($data->getId(), 'id', $doc));
 			}
 		}
 		

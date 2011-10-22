@@ -1,6 +1,7 @@
 <?php
 
 abstract class HackJob_Model_Base
+	implements HackJob_Xslt_DomExportInterface
 {
 	protected $_id;
 	protected $_className;
@@ -262,6 +263,31 @@ abstract class HackJob_Model_Base
 			}
 			$this->$key = $value;
 		}
+	}
+	
+	public function toDomElement($name, DOMDocument $doc)
+	{
+		if($doc === null)
+		{
+			$doc = new DOMDocument();
+		}
+		
+		if($name === null)
+		{
+			$name = $this->_className;
+		}
+		
+		$node = $doc->createElement($name);
+		
+		foreach($this->getFields() as $property)
+		{
+			$value = $this->$property;
+			$node->appendChild(HackJob_Xslt_Transformer::toDomElement($value, $property, $doc));
+		}
+		
+		$node->appendChild(HackJob_Xslt_Transformer::toDomElement($this->getId(), 'id', $doc));
+		
+		return $node;
 	}
 }
 
