@@ -1,0 +1,1 @@
+<?phpclass HackJob_Conf_Exception	extends HackJob_Core_Exception {}?>

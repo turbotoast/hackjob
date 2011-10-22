@@ -1,0 +1,1 @@
+<?phpclass HackJob_Model_Exception_MoreThanOneFound	extends HackJob_Model_Exception_Base {}?>
