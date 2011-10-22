@@ -17,13 +17,13 @@ class HackJob_Utile_StringTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new HackJob_Utile_String('HackJob\'s quite awesome! ��%#@ %');
+        $this->object = new HackJob_Utile_String('HackJob\'s quite awesome! äüöß %');
     }
     
     public function testGetString()
     {
     	$this->assertEquals(
-    		'HackJob\'s quite awesome! ��%#@ %',
+    		'HackJob\'s quite awesome! äüöß %',
     		$this->object->getString());
     }
     
