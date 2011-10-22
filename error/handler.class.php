@@ -11,9 +11,10 @@ class HackJob_Error_Handler
 	public function handleException(Exception $e)
 	{
 		echo '<h1>Exception occured</h1>';
-		echo '<h2>' . get_class($e) . '</h2>';
+		echo '<h2>Type: ' . get_class($e) . '</h2>';
+		echo '<h3>Message</h3>';
 		echo '<p>' . $e->getMessage() . '</p>';
-		echo $e->getTraceAsString();
+		echo '<pre>' . $e->getTraceAsString() . '</pre>';
 		die;
 	}
 }
