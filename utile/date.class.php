@@ -41,6 +41,12 @@ class HackJob_Utile_Date
 		return $instance;
 	}
 	
+	public function toMySQLDate($withTime = false)
+	{
+		$format = $withTime ? 'Y-m-d H:i:s' : 'Y-m-d';
+		return $this->toFormat($format);
+	}
+	
 	public function toGermanDate($withTime = false)
 	{
 		$format = $withTime ? 'd.m.Y H:i:s' : 'd.m.Y';
