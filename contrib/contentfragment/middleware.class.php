@@ -19,6 +19,7 @@ class HackJob_Contrib_ContentFragment_Middleware
 		{
 			$this->replaceNode($node);
 		}
+		
 		$response->content = $this->doc->saveHTML();
 		
 		return $response;
@@ -36,7 +37,16 @@ class HackJob_Contrib_ContentFragment_Middleware
 	
 	protected function getReplacementNode($handle, $isHTML = false)
 	{
-		$model = HackJob_Contrib_ContentFragment_Model::getByHandle($handle);
+		try
+		{
+			$model = HackJob_Contrib_ContentFragment_Model::getByHandle($handle);
+		}
+		catch(HackJob_Model_Exception_Base $e)
+		{
+			throw new HackJob_Contrib_ContentFragment_Exception(sprintf(
+				'Could not find content fragment for handle "%s".', $handle
+			));
+		}
 		$content = $model->content;
 
 		if($isHTML)
