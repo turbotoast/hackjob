@@ -20,6 +20,15 @@ class HackJob_Xslt_TransformerTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals('nodename', $node->nodeName);
 	}
 	
+	public function testBoolToDomElement()
+	{
+		$foo = true;
+		$node = HackJob_Xslt_Transformer::toDomElement($foo, 'bar', $this->doc);
+		
+		$this->assertEquals('true', $node->nodeValue);
+		$this->assertEquals('bar', $node->nodeName);
+	}
+	
 	public function testIntToDomElement()
 	{
 		$node = HackJob_Xslt_Transformer::toDomElement(1, 'nodename', $this->doc);

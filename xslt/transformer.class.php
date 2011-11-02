@@ -38,7 +38,12 @@ class HackJob_Xslt_Transformer
 			
 			if(is_string($data) || is_int($data))
 			{
-					$node->appendChild($doc->createTextNode($data));
+				$node->appendChild($doc->createTextNode($data));
+			}
+			else if(is_bool($data))
+			{
+				$data = $data ? 'true' : 'false';
+				$node->appendChild($doc->createTextNode($data));
 			}
 			else if(is_object($data) || is_array($data))
 			{
