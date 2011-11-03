@@ -21,10 +21,12 @@
 	</xsl:template>
 	
 	<xsl:template match="allowNew">
-		<a>
-			<xsl:attribute name="href"><xsl:value-of select="concat($basepath, '/', $crud_slug, '/', /root/description/app/slug, '/new/')" /></xsl:attribute>
-			Hinzufügen
-		</a>
+		<p>
+			<a class="button">
+				<xsl:attribute name="href"><xsl:value-of select="concat($basepath, '/', $crud_slug, '/', /root/description/app/slug, '/new/')" /></xsl:attribute>
+				Hinzufügen
+			</a>
+		</p>
 	</xsl:template>
 	
 	<xsl:template match="list">
@@ -45,11 +47,10 @@
 	
 	<xsl:template match="list/*" mode="crud.tablebody">
 		<tr>
-			<xsl:for-each select="*">
-				<xsl:variable name="nodename"><xsl:value-of select="name()" /></xsl:variable>
-				<xsl:if test="/root/description/fields/HackJob_Contrib_CRUD_Field[field = $nodename and showInList = 'true']">
-					<td><xsl:value-of select="." /></td>
-				</xsl:if>
+			<xsl:variable name="model" select="." />
+			<xsl:for-each select="/root/description/fields/HackJob_Contrib_CRUD_Field[showInList = 'true']">
+				<xsl:variable name="fieldname"><xsl:value-of select="field" /></xsl:variable>
+				<td><xsl:apply-templates select="$model/*[name() = $fieldname]" /></td>
 			</xsl:for-each>
 			<td>
 				<a>

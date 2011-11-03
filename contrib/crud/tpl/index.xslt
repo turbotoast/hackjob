@@ -28,8 +28,8 @@
 				</link>
 			</head>
 			<body>
+				<xsl:apply-templates select="/root/descriptions" mode="crud.navigation" />
 				<div id="wrapper">
-					<xsl:apply-templates select="/root/descriptions" mode="crud.navigation" />
 					<xsl:call-template name="crud.content" />
 				</div>
 			</body>

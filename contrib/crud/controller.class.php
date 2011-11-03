@@ -165,18 +165,22 @@ class HackJob_Contrib_CRUD_Controller
 		return $this->docResponse($doc, $request, $template);
 	}
 	
+	protected function docResponse($doc, $request, $template = null, $params = array())
+	{
+		$descriptions = $this->getDescriptions();
+		$doc->documentElement->appendChild(
+			HackJob_Xslt_Transformer::toDomElement(
+				$descriptions, 'descriptions', $doc
+		));
+		return parent::docResponse($doc, $request, $template, $params);
+	}
+	
 	public function indexResponse(HackJob_Request_Request $request)
 	{
 		$template = realpath(dirname(__FILE__)) . '/tpl/index.xslt';
 		
 		$doc = $this->getDoc();
-		$descriptions = $this->getDescriptions();
 		
-		$doc->documentElement->appendChild(
-			HackJob_Xslt_Transformer::toDomElement(
-				$descriptions, 'descriptions', $doc
-		));
-
 		return $this->docResponse($doc, $request, $template);
 	}	
 }
