@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS `content_fragment` (
 	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`handle` VARCHAR(100) NOT NULL,
+	`description` TEXT,
 	`content` TEXT NOT NULL,
 	PRIMARY KEY(`id`),
 	UNIQUE KEY(`handle`)

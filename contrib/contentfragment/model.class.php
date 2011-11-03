@@ -5,6 +5,7 @@ class HackJob_Contrib_ContentFragment_Model
 {
 	public $handle;
 	public $content;
+	public $description;
 
 	public function __construct($param = null)
 	{
