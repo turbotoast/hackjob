@@ -10,6 +10,11 @@ class HackJob_Contrib_ContentFragment_Middleware
 		HackJob_Request_Request $request, 
 		HackJob_Response_Base $response)
 	{
+		if(!$response->content)
+		{
+			return $response;
+		}
+		
 		$this->getDoc($response);
 		$this->getXPath();
 
