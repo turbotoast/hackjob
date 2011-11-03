@@ -40,7 +40,7 @@
 	</xsl:template>
 	
 	<xsl:template match="HackJob_Contrib_CRUD_Field[type = 'text']" mode="crud.form.field">
-		<input type="text">
+		<input type="text" class="text">
 			<xsl:attribute name="name">crud[<xsl:value-of select="field" />]</xsl:attribute>
 			<xsl:attribute name="id">crud_<xsl:value-of select="field" /></xsl:attribute>
 			<xsl:attribute name="value">

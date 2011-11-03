@@ -50,7 +50,14 @@ class HackJob_Contrib_CRUD_Controller
 		}
 		
 		$pathSegments = explode('/', $path);
-		$this->description = $this->getDescription(array_shift($pathSegments));
+		$segment = array_shift($pathSegments);
+		
+		if($segment == 'css')
+		{
+			return $this->cssResponse($request);
+		}
+		
+		$this->description = $this->getDescription($segment);
 		
 		if(!$pathSegments)
 		{
@@ -66,6 +73,14 @@ class HackJob_Contrib_CRUD_Controller
 			case 'del': return $this->deleteResponse($request, array_shift($pathSegments));
 			case 'save': return $this->save($request);
 		}
+	}
+	
+	public function cssResponse(HackJob_Request_Request $request)
+	{
+		$css = file_get_contents(realpath(dirname(__FILE__)) . '/media/crud.css');
+		header('Content-type: text/css');
+		echo $css;
+		die;
 	}
 	
 	public function deleteResponse(HackJob_Request_Request $request, $id)

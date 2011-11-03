@@ -23,10 +23,15 @@
 		<html>
 			<head>
 				<title>HackJob CRUD</title>
+				<link rel="stylesheet" type="text/css">
+					<xsl:attribute name="href"><xsl:value-of select="concat($basepath, '/', $crud_slug, '/css/')" /></xsl:attribute>
+				</link>
 			</head>
 			<body>
-				<xsl:apply-templates select="/root/descriptions" mode="crud.navigation" />
-				<xsl:call-template name="crud.content" />
+				<div id="wrapper">
+					<xsl:apply-templates select="/root/descriptions" mode="crud.navigation" />
+					<xsl:call-template name="crud.content" />
+				</div>
 			</body>
 		</html>
 	</xsl:template>

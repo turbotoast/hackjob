@@ -1,0 +1,15 @@
+body { background-color: #799AA5; color: #152737; margin: 20px; font-family: Trebuchet MS, sans-serif; }
+#wrapper { width: 70%; left: 50%; margin-left: -35%; position: absolute; padding: 0% 2% 2% 2%; }
+a, a:visited, a:active { color: #682321; text-decoration: none; font-weight: bold; }
+
+h1 { color: #2B4E69; font-size: 250%; width: 100%; text-align: center; border-bottom: 1px solid #2B4E69; padding-bottom: 1%; }
+
+table { width: 100%; }
+table thead th { color: #FFFFF0; text-transform: uppercase; background-color: #2B4E69; padding: 0.5% 0.5% 0.5% 1%; text-align: left; }
+
+form ol { list-style-type: none; padding: 0; }
+label { font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 1%; color: #2B4E69; }
+input.text { height: 25px; width: 50%; margin-bottom: 3%; font-size: 100%; padding: 0.5%; }
+textarea { width: 50%; height: 100px; margin-bottom: 3%; font-size: 100%; padding: 0.5%; }
+
+button { border: 1px solid #FFFFF0; background-color: #2B4E69; padding: 1% 2%; font-weight: bold; color: #FFFFF0; font-size: 150%; }
