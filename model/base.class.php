@@ -171,7 +171,7 @@ abstract class HackJob_Model_Base
 		if($this->isInDb())
 		{
 			$stmt = $this->getUpdateStatement();
-			$stmt->bindParam(':id', $this->getId(), PDO::PARAM_INT);
+			$stmt->bindValue(':id', $this->getId(), PDO::PARAM_INT);
 		}
 		else
 		{
