@@ -129,7 +129,7 @@ abstract class HackJob_Model_Base
 	public function delete()
 	{
 		$stmt = $this->getDeleteStatement();
-		$stmt->bindParam(':id', $this->getId(), PDO::PARAM_INT);
+		$stmt->bindValue(':id', $this->getId(), PDO::PARAM_INT);
 		$stmt->execute();
 		
 		foreach($this->getFields() as $field)
