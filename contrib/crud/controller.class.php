@@ -6,6 +6,15 @@ class HackJob_Contrib_CRUD_Controller
 	private $description;
 	private $descriptions;
 	
+	public function __construct($matches)
+	{
+		if(isset($matches['appName']))
+		{
+			$this->description = $this->getDescription($matches['appName']);
+		}
+		parent::__construct($matches);
+	}
+	
 	protected function getDescriptions()
 	{
 		if($this->descriptions === null)
@@ -36,55 +45,29 @@ class HackJob_Contrib_CRUD_Controller
 		return $descriptions[$slug];
 	}
 
-	public function response(HackJob_Request_Request $request)
+	public function mediaResponse(HackJob_Request_Request $request)
 	{
-		$crudSlug = HackJob_Conf_Provider::get('HACKJOB_CONTRIB_CRUD_SLUG');
-		$requestUri = $request->getRequestUri();
+		$content = file_get_contents(realpath(dirname(__FILE__)) . '/media/' 
+			. $this->matches['mediaName']);
 		
-		$path = substr($requestUri, strpos($requestUri, $crudSlug) + strlen($crudSlug) + 1);
-		$path = rtrim($path, '/');
+		$parts = explode('.', $this->matches['mediaName']);
+		$extension = array_pop($parts);
 		
-		if(!$path)
-		{
-			return $this->indexResponse($request);
-		}
+		$mime = array(
+			'css' => 'text/css',
+			'ttf' => 'application/x-font-ttf'
+		);	
+		$mimeType = $mime[$extension];
 		
-		$pathSegments = explode('/', $path);
-		$segment = array_shift($pathSegments);
+		header('Content-type: ' . $mimeType);
 		
-		if($segment == 'css')
-		{
-			return $this->cssResponse($request);
-		}
-		
-		$this->description = $this->getDescription($segment);
-		
-		if(!$pathSegments)
-		{
-			return $this->listResponse($request);
-		}
-		
-		$action = array_shift($pathSegments);
-
-		switch($action)
-		{
-			case 'new': return $this->newResponse($request);
-			case 'edit': return $this->editResponse($request, array_shift($pathSegments));
-			case 'del': return $this->deleteResponse($request, array_shift($pathSegments));
-			case 'save': return $this->save($request);
-		}
-	}
-	
-	public function cssResponse(HackJob_Request_Request $request)
-	{
-		$css = file_get_contents(realpath(dirname(__FILE__)) . '/media/crud.css');
-		header('Content-type: text/css');
-		echo $css;
+		echo $content;
 		die;
 	}
 	
-	public function deleteResponse(HackJob_Request_Request $request, $id)
+	public function deleteResponse(HackJob_Request_Request $request)
 	{
+		$id = $this->matches['modelId'];
 		$className = $this->description->getModelClassName();
 		$model = new $className($id);
 		$model->delete();
@@ -92,7 +75,7 @@ class HackJob_Contrib_CRUD_Controller
 		return new HackJob_Response_Redirect('../..');
 	}
 	
-	public function save(HackJob_Request_Request $request)
+	public function saveResponse(HackJob_Request_Request $request)
 	{
 		$className = $this->description->getModelClassName();
 		
@@ -132,8 +115,9 @@ class HackJob_Contrib_CRUD_Controller
 		return $this->docResponse($doc, $request, $template);
 	}
 	
-	public function editResponse(HackJob_Request_Request $request, $id)
+	public function editResponse(HackJob_Request_Request $request)
 	{
+		$id = $this->matches['modelId'];
 		$template = realpath(dirname(__FILE__)) . '/tpl/edit.xslt';
 		$doc = $this->getDoc();
 		$doc->documentElement->appendChild(
@@ -149,7 +133,7 @@ class HackJob_Contrib_CRUD_Controller
 		return $this->docResponse($doc, $request, $template);
 	}
 	
-	public function listResponse(HackJob_Request_Request $request)
+	public function response(HackJob_Request_Request $request)
 	{
 		$template = realpath(dirname(__FILE__)) . '/tpl/list.xslt';
 
