@@ -38,6 +38,12 @@
 	
 	<xsl:template match="descriptions" mode="crud.navigation">
 		<ul class="navigation">
+			<li>
+				<a>
+					<xsl:attribute name="href"><xsl:value-of select="concat($basepath, '/', $crud_slug, '/')"/></xsl:attribute>
+					Start
+				</a>
+			</li>
 			<xsl:apply-templates select="*" mode="crud.navigation" />
 		</ul>
 	</xsl:template>
@@ -51,5 +57,8 @@
 		</li>
 	</xsl:template>
 	
-	<xsl:template name="crud.content" />
+	<xsl:template name="crud.content">
+		<h1>HackJob CRUD</h1>
+		<p>Bitte wählen Sie auf der linken Seite eine Applikation aus.</p>
+	</xsl:template>
 </xsl:stylesheet>
