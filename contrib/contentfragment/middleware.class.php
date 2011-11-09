@@ -15,7 +15,15 @@ class HackJob_Contrib_ContentFragment_Middleware
 			return $response;
 		}
 		
-		$this->getDoc($response);
+		try
+		{
+			$this->getDoc($response);
+		}
+		catch(HackJob_Error_Exception $e)
+		{
+			return $response;
+		}
+		
 		$this->getXPath();
 
 		$nodes = $this->xPath->query('//hackjob:content_fragment');
