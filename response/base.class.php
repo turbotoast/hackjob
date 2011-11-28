@@ -32,6 +32,19 @@ abstract class HackJob_Response_Base
 			$this->headers[] = $contentHeader;
 		}
 	}
+	
+	public function output()
+	{
+		foreach($this->headers as $header)
+		{
+			header($header);
+		}
+		
+		if(strlen($this->content))
+		{
+			echo $this->content;
+		}
+	}
 }
 
 ?>
