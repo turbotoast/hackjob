@@ -10,7 +10,7 @@ class HackJob_Response_Redirect
 			$redirectTo = HackJob_Conf_Provider::get('BASEPATH') . $redirectTo;
 		}
 		$redirectHeader = 'Location: ' . $redirectTo;
-		parent::__construct('', array($redirectHeader), 301);
+		parent::__construct('', array($redirectHeader), '301 Moved Permamently');
 	}
 }
 

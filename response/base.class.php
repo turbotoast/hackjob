@@ -6,11 +6,16 @@ abstract class HackJob_Response_Base
 	public $headers = array();
 	public $content;
 	
-	public function __construct($content, $headers = array(), $status)
+	public function __construct($content, $headers = array(), $status = null)
 	{
 		$this->content = $content;
 		$this->headers = $headers;
 		$this->status = $status;
+		
+		if($this->status !== null)
+		{
+			array_unshift($this->headers, 'HTTP/1.0 ' . $this->status);
+		}
 		
 		$contentTypeSet = false;
 		foreach($this->headers as $header)

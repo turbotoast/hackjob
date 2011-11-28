@@ -1,1 +1,1 @@
-<?phpclass HackJob_Response_NotFound	extends HackJob_Response_Base{	public function __construct($content, $headers = array())	{		parent::__construct($content, $headers, 404);	}}?>
+<?phpclass HackJob_Response_NotFound	extends HackJob_Response_Base{	public function __construct($content, $headers = array())	{		parent::__construct($content, $headers, '404 Not Found');	}}?>
