@@ -83,7 +83,10 @@ abstract class HackJob_Model_Base
 			$sql .= " WHERE ";
 			$sql .= implode(' AND ', $filters);
 		}
-		$sql .= ' ORDER BY ' . $orderColumn;
+		if($orderColumn)
+		{
+			$sql .= ' ORDER BY ' . $orderColumn;
+		}
 		
 		if($limit)
 		{
@@ -93,7 +96,7 @@ abstract class HackJob_Model_Base
 		{
 			$sql .= " OFFSET " . $offset;
 		}
-		
+
 		$stmt = HackJob_Db_Provider::getInstance()->prepare($sql);
 		
 		if(!is_null($filters))
