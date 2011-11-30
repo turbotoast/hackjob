@@ -55,7 +55,14 @@
 			<xsl:attribute name="name">crud[<xsl:value-of select="field" />]</xsl:attribute>
 			<xsl:attribute name="id">crud_<xsl:value-of select="field" /></xsl:attribute>
 			<xsl:if test="editable='false'"><xsl:attribute name="disabled">disabled</xsl:attribute></xsl:if>
-			<xsl:apply-templates select="/root/model/*[name() = current()/field]" />
+			<xsl:choose>
+				<xsl:when test="/root/model/*[name() = current()/field]">	
+					<xsl:apply-templates select="/root/model/*[name() = current()/field]" />
+				</xsl:when>
+				<xsl:otherwise>
+					&#160;
+				</xsl:otherwise>
+			</xsl:choose>
 		</textarea>
 	</xsl:template>
 	
